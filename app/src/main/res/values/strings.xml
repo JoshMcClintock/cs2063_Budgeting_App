@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- App Name -->
+    <string name="app_name">BudgetingApp</string>
+
+    <!--  Titles  -->
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_income">Income</string>
+    <string name="title_expenses">Expenses</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_add_income">Add Income</string>
+    <string name="title_edit_income">Edit or Delete Income</string>
+    <string name="title_add_expense">Add Expense</string>
+    <string name="title_delete_income">Delete Income?</string>
+    <string name="title_delete_expense">Delete Expense?</string>
+
+    <!--  Messages  -->
+    <string name="msg_delete_income">Are you sure you want to delete this income?</string>
+    <string name="msg_delete_expense">Are you sure you want to delete this expense?</string>
+
+    <!--  Buttons  -->
+    <string name="btn_add_income">Add Income</string>
+    <string name="btn_add_expense">Add Expense</string>
+    <string name="btn_save">Save</string>
+    <string name="ib_calendar">Select a date</string>
+    <string name="btn_delete">Delete</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_delete_income_desc">Delete Income</string>
+    <string name="btn_delete_expense_desc">Delete Expense</string>
+
+    <!--  Text Views  -->
+    <string name="tv_income_label">Income this Month:</string>
+    <string name="tv_expenses_label">Expenses this Month:</string>
+    <string name="tv_name_label">Name:</string>
+    <string name="tv_amount_label">Amount:</string>
+    <string name="tv_date_label">Date:</string>
+    <string name="tv_total_income_label">Total Income for %s:</string>
+    <string name="tv_total_expense_label">Total Expenses for %s:</string>
+    <string name="tv_money_saved_label">Money Saved this Month:</string>
+
+    <!--  Edit Texts  -->
+    <string name="et_date_hint">Select Date</string>
+    <string name="tv_income_name_hint">Salary, Part Time Job, etc.</string>
+    <string name="tv_expense_name_hint">Rent, Groceries, etc.</string>
+    <string name="tv_amount_hint">999.99</string>
+
+</resources>
