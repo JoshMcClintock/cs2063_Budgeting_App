@@ -1,10 +1,9 @@
 package ca.unb.mobiledev.budgetingapp.ui.income;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -14,10 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModel;
 
 import ca.unb.mobiledev.budgetingapp.MainActivity;
 import ca.unb.mobiledev.budgetingapp.R;
 import ca.unb.mobiledev.budgetingapp.entity.Income;
+import ca.unb.mobiledev.budgetingapp.ui.calendar.CalendarFragment;
 
 public class AddIncomeActivity extends AppCompatActivity {
 
@@ -25,12 +28,12 @@ public class AddIncomeActivity extends AppCompatActivity {
     private EditText etAmount;
     private EditText etDate;
 
-    private Income income;
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_income);
+
+        Intent intent = getIntent();
 
 
         // ========================================================================================
@@ -82,7 +85,6 @@ public class AddIncomeActivity extends AppCompatActivity {
 
             // Insert the new income
             MainActivity.incomeViewModel.insert(name, amount, day, month, year);
-
 
             // Notify the user that the income was saved
             Toast.makeText(this, "New income saved", Toast.LENGTH_SHORT).show();

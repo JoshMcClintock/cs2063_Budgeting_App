@@ -21,17 +21,41 @@ public class ExpenseViewModel extends AndroidViewModel {
         expenseRepository = new ExpenseRepository(application);
     }
 
+
+
     public List<Expense> getAllExpenses() {
         return expenseRepository.getAllExpenses();
     }
+
+
 
     public List<Expense> getMonthlyExpenses(int month, int year) {
         return expenseRepository.getMonthlyExpenses(month, year);
     }
 
+
+
+    public List<Expense> getWeeklyExpenses(int year, int month, int startDay, int endDay) {
+        return expenseRepository.getWeeklyExpenses(year, month, startDay, endDay);
+    }
+
+
+    public List<Expense> getDailyExpenses(int year, int month, int day) {
+        return expenseRepository.getDailyExpenses(year, month, day);
+    }
+
+
+    public Expense getExpenseById(int id) {
+        return expenseRepository.getExpenseById(id);
+    }
+
+
+
     public void insert(String name, double amount, int day, int month, int year) {
         expenseRepository.insertRecord(name, amount, day, month, year);
     }
+
+
 
     public void delete(Expense expense) {
         expenseRepository.deleteRecord(expense);

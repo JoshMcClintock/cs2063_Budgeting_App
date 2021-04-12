@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.BudgetingApp">
+<!--        android:theme="@style/Theme.BudgetingApp">-->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name">
@@ -26,6 +27,18 @@
 
         <activity android:name=".ui.expenses.AddExpenseActivity"
             android:label="@string/title_add_expense">
+        </activity>
+
+        <activity android:name=".ui.calendar.CalendarActivity"
+            android:label="@string/title_calendar_details">
+        </activity>
+
+        <activity android:name=".ui.income.IncomeDetailsActivity"
+            android:label="@string/title_income_details">
+        </activity>
+
+        <activity android:name=".ui.expenses.ExpenseDetailsActivity"
+            android:label="@string/title_expense_details">
         </activity>
 
     </application>

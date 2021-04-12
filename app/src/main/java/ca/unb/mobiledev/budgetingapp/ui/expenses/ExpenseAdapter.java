@@ -3,6 +3,7 @@ package ca.unb.mobiledev.budgetingapp.ui.expenses;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.ArrayList;
 import ca.unb.mobiledev.budgetingapp.MainActivity;
 import ca.unb.mobiledev.budgetingapp.R;
 import ca.unb.mobiledev.budgetingapp.entity.Expense;
+import ca.unb.mobiledev.budgetingapp.ui.income.IncomeDetailsActivity;
 
 public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHolder> {
 
@@ -35,11 +37,11 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
     // but RecyclerView gives us the flexibility to do more complex things
     // (e.g., display an image and some text).
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TableRow mRelativeLayout;
+        public TableRow mTableRow;
 
         public ViewHolder(TableRow v) {
             super(v);
-            mRelativeLayout = v;
+            mTableRow = v;
         }
     }
 
@@ -63,21 +65,34 @@ public class ExpenseAdapter extends RecyclerView.Adapter<ExpenseAdapter.ViewHold
 
         final Expense expense = mDataset.get(position);
 
-        TextView tvName = holder.mRelativeLayout.findViewById(R.id.tv_item_name);
-        TextView tvAmount = holder.mRelativeLayout.findViewById(R.id.tv_item_amount);
-        TextView tvDate = holder.mRelativeLayout.findViewById(R.id.tv_item_date);
-        ImageButton btnDelete = holder.mRelativeLayout.findViewById(R.id.ibDelete);
+        TextView tvName = holder.mTableRow.findViewById(R.id.tv_item_name);
+        TextView tvAmount = holder.mTableRow.findViewById(R.id.tv_item_amount);
+        TextView tvDate = holder.mTableRow.findViewById(R.id.tv_item_date);
 
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
-        tvName.setText(expense.getName());
-        tvAmount.setText(numberFormat.format(expense.getAmount()));
-        tvDate.setText(expense.getDay() + "-" + (expense.getMonth() + 1) + "-" + expense.getYear());
+        String name = expense.getName();
+        String date = expense.getDay() + "-" + (expense.getMonth() + 1) + "-" + expense.getYear();
+        double amount = expense.getAmount();
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        tvName.setText(name);
+        tvAmount.setText(numberFormat.format(amount));
+        tvDate.setText(date);
+
+        tvName.setText(name);
+        tvAmount.setText(numberFormat.format(amount));
+        tvDate.setText(date);
+
+        holder.mTableRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDeleteConfirmationDialog(expense);
+                Intent intent = new Intent(context, ExpenseDetailsActivity.class)
+                        .putExtra("id", expense.getId())
+                        .putExtra("name", name)
+                        .putExtra("amount", numberFormat.format(amount))
+                        .putExtra("date", date);
+
+                context.startActivity(intent);
             }
         });
 

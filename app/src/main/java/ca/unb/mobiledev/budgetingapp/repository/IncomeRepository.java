@@ -2,9 +2,6 @@ package ca.unb.mobiledev.budgetingapp.repository;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
@@ -41,13 +38,13 @@ public class IncomeRepository {
     }
 
 
-    public List<Income> getMonthlyIncome(int month, int year) {
+    public List<Income> getWeeklyIncome(int year, int month, int startDay, int endDay) {
         List<Income> liveData = null;
 
         Future<List<Income>> future = AppDatabase.databaseWriterExecutor.submit(new Callable<List<Income>>() {
             @Override
             public List<Income> call() {
-                return incomeDao.getMonthlyIncome(month, year);
+                return incomeDao.getWeeklyIncome(year, month, startDay, endDay);
             }
         });
 
@@ -58,6 +55,71 @@ public class IncomeRepository {
         }
         return liveData;
     }
+
+
+
+    public List<Income> getMonthlyIncome(int month, int year) {
+        List<Income> liveData = null;
+
+        Future<List<Income>> future = AppDatabase.databaseWriterExecutor.submit(new Callable<List<Income>>() {
+            @Override
+            public List<Income> call() {
+                return incomeDao.getMonthlyIncome(month, year);
+            }
+        });
+
+
+        try {
+            liveData = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return liveData;
+    }
+
+
+
+    public List<Income> getDailyIncome(int year, int month, int day) {
+        List<Income> liveData = null;
+
+        Future<List<Income>> future = AppDatabase.databaseWriterExecutor.submit(new Callable<List<Income>>() {
+            @Override
+            public List<Income> call() {
+                return incomeDao.getDailyIncome(year, month, day);
+            }
+        });
+
+        try {
+            liveData = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return liveData;
+    }
+
+
+
+    public Income getIncomeById(int id) {
+        Income income = null;
+
+        Future<Income> future = AppDatabase.databaseWriterExecutor.submit(new Callable<Income>() {
+            @Override
+            public Income call() throws Exception {
+                return incomeDao.getIncomeById(id);
+            }
+        });
+
+
+        try {
+            income = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return income;
+    }
+
 
 
     public void insertRecord(String name, double amount, int day, int month, int year) {
