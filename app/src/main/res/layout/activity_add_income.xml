@@ -8,19 +8,24 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvIncomeNameLabel"
             android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="@string/tv_name_label" />
+            android:layout_margin="8dp"
+            android:layout_weight=".15"
+            android:text="@string/tv_name_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/etIncomeName"
             android:layout_width="256dp"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight=".85"
             android:hint="@string/tv_income_name_hint"
             android:importantForAutofill="no"
             android:inputType="textPersonName" />
@@ -28,19 +33,24 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvIncomeAmountLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="@string/tv_amount_label" />
+            android:layout_margin="8dp"
+            android:layout_weight=".15"
+            android:text="@string/tv_amount_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/etIncomeAmount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight=".85"
             android:hint="@string/tv_amount_hint"
             android:importantForAutofill="no"
             android:inputType="numberDecimal" />
@@ -48,19 +58,24 @@
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center_vertical">
 
         <TextView
             android:id="@+id/tvIncomeDateLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="64dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:text="@string/tv_date_label" />
+            android:layout_margin="8dp"
+            android:layout_weight=".15"
+            android:text="@string/tv_date_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <EditText
             android:id="@+id/etIncomeDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight=".7"
             android:enabled="false"
             android:hint="@string/et_date_hint"
             android:importantForAutofill="no"
@@ -70,23 +85,27 @@
             android:id="@+id/ibIncomeDatePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_weight=".15"
             android:contentDescription="@string/ib_calendar"
             app:srcCompat="@drawable/ic_calendar_black_24dp" />
     </TableRow>
 
     <TableRow
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal|center_vertical">
 
         <Button
             android:id="@+id/btnSaveNewIncome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_margin="8dp"
+            android:layout_span="3"
+            android:gravity="center_horizontal|center_vertical"
             android:text="@string/btn_save"
-            android:layout_span="3"/>
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
     </TableRow>
 
 </TableLayout>

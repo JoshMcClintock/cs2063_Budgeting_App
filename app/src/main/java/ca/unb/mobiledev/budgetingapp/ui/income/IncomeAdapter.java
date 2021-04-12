@@ -39,11 +39,11 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
     // but RecyclerView gives us the flexibility to do more complex things
     // (e.g., display an image and some text).
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public TableRow mRelativeLayout;
+        public TableRow mTableRow;
 
         public ViewHolder(TableRow v) {
             super(v);
-            mRelativeLayout = v;
+            mTableRow = v;
         }
     }
 
@@ -65,24 +65,33 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-
         final Income income = mDataset.get(position);
 
-        TextView tvName = holder.mRelativeLayout.findViewById(R.id.tv_item_name);
-        TextView tvAmount = holder.mRelativeLayout.findViewById(R.id.tv_item_amount);
-        TextView tvDate = holder.mRelativeLayout.findViewById(R.id.tv_item_date);
-        ImageButton btnDelete = holder.mRelativeLayout.findViewById(R.id.ibDelete);
+        TextView tvName = holder.mTableRow.findViewById(R.id.tv_item_name);
+        TextView tvAmount = holder.mTableRow.findViewById(R.id.tv_item_amount);
+        TextView tvDate = holder.mTableRow.findViewById(R.id.tv_item_date);
 
         NumberFormat numberFormat = NumberFormat.getCurrencyInstance();
 
-        tvName.setText(income.getName());
-        tvAmount.setText(numberFormat.format(income.getAmount()));
-        tvDate.setText(income.getDay() + "-" + (income.getMonth() + 1) + "-" + income.getYear());
+        String name = income.getName();
+        String date = income.getDay() + "-" + (income.getMonth() + 1) + "-" + income.getYear();
+        double amount = income.getAmount();
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        tvName.setText(name);
+        tvAmount.setText(numberFormat.format(amount));
+        tvDate.setText(date);
+
+        holder.mTableRow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openDeleteConfirmationDialog(income);
+
+                Intent intent = new Intent(context, IncomeDetailsActivity.class)
+                        .putExtra("id", income.getId())
+                        .putExtra("name", name)
+                        .putExtra("amount", numberFormat.format(amount))
+                        .putExtra("date", date);
+
+                context.startActivity(intent);
             }
         });
 
@@ -91,33 +100,6 @@ public class IncomeAdapter extends RecyclerView.Adapter<IncomeAdapter.ViewHolder
     @Override
     public int getItemCount() {
         return mDataset.size();
-    }
-
-
-    private void openDeleteConfirmationDialog(Income income) {
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-
-        builder.setTitle(R.string.title_delete_income)
-                .setMessage(R.string.msg_delete_income);
-
-        builder.setPositiveButton(R.string.btn_delete, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                MainActivity.incomeViewModel.delete(income);
-                Toast.makeText(context, "Income deleted", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        builder.setNegativeButton(R.string.btn_cancel, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
-        });
-
-        builder.show();
-
     }
 
 }

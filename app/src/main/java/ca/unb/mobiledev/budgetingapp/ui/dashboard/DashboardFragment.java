@@ -1,5 +1,6 @@
 package ca.unb.mobiledev.budgetingapp.ui.dashboard;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,12 +10,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormatSymbols;
 import java.text.NumberFormat;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
@@ -34,8 +42,12 @@ public class DashboardFragment extends Fragment {
     private ArrayList<Expense> expenses;
     private NumberFormat numberFormat;
 
+    private PieChart pieChart;
+
     private double totalIncome;
     private double totalExpenses;
+
+    private Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -51,7 +63,8 @@ public class DashboardFragment extends Fragment {
         incomeViewModel = MainActivity.incomeViewModel;
         expenseViewModel = MainActivity.expenseViewModel;
 
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        pieChart = getView().findViewById(R.id.pieChart);
+
         int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
         incomes = new ArrayList<>(incomeViewModel.getMonthlyIncome(month, year));
@@ -64,58 +77,116 @@ public class DashboardFragment extends Fragment {
     }
 
     private void loadPage() {
+
+        TextView header = getView().findViewById(R.id.tvDashboardHeader);
+        header.setText(getCurrentMonth());
+
         loadTotalIncome();
         loadTotalExpenses();
         loadSavings();
+
+        loadPieChart();
     }
 
     private void loadTotalIncome() {
-        totalIncome = 0.0;
+        totalIncome = 0.0d;
 
-        for (Income i :
-                incomes) {
+        for (Income i : incomes) {
             totalIncome += i.getAmount();
         }
 
-        TextView label = getView().findViewById(R.id.tvTotalIncomeLabel);
         TextView amount = getView().findViewById(R.id.tvTotalIncomeAmount);
 
-        label.setText(String.format((String) label.getText(), getCurrentMonth()));
-        amount.setText(numberFormat.format(totalIncome));
+        if (totalIncome == 0.0d) {
+            amount.setText("No Income");
+        }
+        else {
+            amount.setText(numberFormat.format(totalIncome));
+        }
 
     }
 
     private void loadTotalExpenses() {
-        totalExpenses = 0.0;
+        totalExpenses = 0.0d;
 
-        for (Expense e :
-                expenses) {
+        for (Expense e : expenses) {
             totalExpenses += e.getAmount();
         }
 
-        TextView label = getView().findViewById(R.id.tvTotalExpensesLabel);
         TextView amount = getView().findViewById(R.id.tvTotalExpenseAmount);
 
-        label.setText(String.format((String) label.getText(), getCurrentMonth()));
-        amount.setText(numberFormat.format(totalExpenses));
-
+        if (totalExpenses == 0.0d) {
+            amount.setText("No Expenses");
+        }
+        else {
+            amount.setText(numberFormat.format(totalExpenses));
+        }
     }
 
 
     private void loadSavings() {
 
         double amount = totalIncome - totalExpenses;
-
         TextView saveAmount = getView().findViewById(R.id.tvMoneySavedAmount);
         saveAmount.setText(numberFormat.format(amount));
 
+        if (amount >= 0.0d) {
+            saveAmount.setTextColor(Color.rgb(34, 139, 34));
+        } else {
+            saveAmount.setTextColor(Color.RED);
+        }
+
     }
+
+
+    private void loadPieChart() {
+        ArrayList<PieEntry> slices = new ArrayList<>();
+        int colors[];
+
+        for (Expense e : expenses) {
+            String label = e.getName();
+            float value = (float) e.getAmount();
+            slices.add(new PieEntry(value, label));
+        }
+
+        if (expenses.isEmpty()) {
+            slices.add(new PieEntry(1, "No expenses"));
+            colors = new int[]{Color.rgb(64, 64, 64)};
+        } else {
+
+            colors = new int[]{
+                    Color.rgb(153, 0, 76),
+                    Color.rgb(76, 0, 153),
+                    Color.rgb(0, 76, 153),
+                    Color.rgb(0, 153, 153),
+                    Color.rgb(0, 153, 76),
+                    Color.rgb(76, 153, 0),
+                    Color.rgb(153, 153, 0),
+                    Color.rgb(153, 76, 0),
+                    Color.rgb(153, 0, 0)
+            };
+        }
+
+
+        PieDataSet pieDataSet = new PieDataSet(slices, "Expense Breakdown");
+        pieDataSet.setColors(colors);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueTextSize(16f);
+
+        PieData pieData = new PieData(pieDataSet);
+
+        pieChart.setData(pieData);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setCenterText("Expense Breakdown");
+        pieChart.animateY(1000);
+    }
+
+
 
     private String getCurrentMonth() {
 
         String strMonth = "";
 
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         int intMonth = calendar.get(Calendar.MONTH);
 
         DateFormatSymbols dfs = new DateFormatSymbols();

@@ -17,7 +17,7 @@ import ca.unb.mobiledev.budgetingapp.dao.IncomeDao;
 import ca.unb.mobiledev.budgetingapp.entity.Expense;
 import ca.unb.mobiledev.budgetingapp.entity.Income;
 
-@Database(entities = {Income.class, Expense.class}, version = 2)
+@Database(entities = {Income.class, Expense.class}, version = 2, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static volatile AppDatabase INSTANCE;
