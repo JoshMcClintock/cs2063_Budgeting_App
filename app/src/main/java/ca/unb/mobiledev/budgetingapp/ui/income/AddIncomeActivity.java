@@ -76,23 +76,29 @@ public class AddIncomeActivity extends AppCompatActivity {
             String name = etName.getText().toString().trim();
             double amount = Double.parseDouble(etAmount.getText().toString().trim());
 
-            String date = etDate.getText().toString();
-            String[] arrDate = date.split("/");
-            int day = Integer.parseInt(arrDate[0]);
-            int month = Integer.parseInt(arrDate[1]);
-            month--;
-            int year = Integer.parseInt(arrDate[2]);
+            if (name.isEmpty()) {
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show();
+            }
+            else {
 
-            // Insert the new income
-            MainActivity.incomeViewModel.insert(name, amount, day, month, year);
+                String date = etDate.getText().toString();
+                String[] arrDate = date.split("/");
+                int day = Integer.parseInt(arrDate[0]);
+                int month = Integer.parseInt(arrDate[1]);
+                month--;
+                int year = Integer.parseInt(arrDate[2]);
 
-            // Notify the user that the income was saved
-            Toast.makeText(this, "New income saved", Toast.LENGTH_SHORT).show();
+                // Insert the new income
+                MainActivity.incomeViewModel.insert(name, amount, day, month, year);
+
+                // Notify the user that the income was saved
+                Toast.makeText(this, "New income saved", Toast.LENGTH_SHORT).show();
 
 
-            // Close the activity
-            finish();
+                // Close the activity
+                finish();
 
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
