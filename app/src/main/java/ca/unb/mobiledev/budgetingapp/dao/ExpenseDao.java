@@ -21,7 +21,7 @@ public interface ExpenseDao {
     @Query("SELECT * FROM expense_table WHERE month=:month AND year=:year ORDER BY day DESC")
     List<Expense> getMonthlyExpenses(int month, int year);
 
-    @Query("SELECT * FROM expense_table WHERE year=:year AND month=:month AND day >= :startDay AND day <= :endDay")
+    @Query("SELECT * FROM expense_table WHERE year=:year AND month=:month AND day >= :startDay AND day <= :endDay ORDER by day ASC")
     List<Expense> getWeeklyExpenses(int year, int month, int startDay, int endDay);
 
     @Query("SELECT * FROM expense_table WHERE year=:year AND month=:month AND day=:day")

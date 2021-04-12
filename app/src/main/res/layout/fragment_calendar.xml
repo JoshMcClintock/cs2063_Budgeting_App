@@ -1,13 +1,194 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <CalendarView
-        android:id="@+id/calendarView"
-        style="@android:style/Widget.Material.Light.CalendarView"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:textAlignment="viewEnd">
 
-</LinearLayout>
+        <CalendarView
+            android:id="@+id/calendarView"
+            style="@android:style/Widget.Material.Light.CalendarView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:text="@string/tv_upcoming_items_label"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textStyle="bold" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="fill_vertical">
+
+            <TextView
+                android:id="@+id/tvDailyDate1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".25"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDailyName1"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDailyAmount1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="fill_vertical">
+
+            <TextView
+                android:id="@+id/tvDailyDate2"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".25"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDailyName2"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDailyAmount2"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="fill_vertical">
+
+            <TextView
+                android:id="@+id/tvDailyDate3"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".25"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDailyName3"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDailyAmount3"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:gravity="fill_vertical">
+
+            <TextView
+                android:id="@+id/tvDailyDate4"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".25"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDailyName4"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDailyAmount4"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="32dp"
+            android:gravity="fill_vertical">
+
+            <TextView
+                android:id="@+id/tvDailyDate5"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_weight=".25"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDailyName5"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="textStart"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <TextView
+                android:id="@+id/tvDailyAmount5"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight=".3"
+                android:textAlignment="viewEnd"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        </TableRow>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="64dp" />
+
+    </LinearLayout>
+
+</ScrollView>

@@ -8,6 +8,7 @@ import androidx.room.Query;
 
 import java.util.List;
 
+import ca.unb.mobiledev.budgetingapp.entity.Expense;
 import ca.unb.mobiledev.budgetingapp.entity.Income;
 
 @Dao
@@ -18,6 +19,9 @@ public interface IncomeDao {
 
     @Query("SELECT * FROM income_table WHERE month=:month AND year=:year ORDER BY day DESC")
     List<Income> getMonthlyIncome(int month, int year);
+
+    @Query("SELECT * FROM income_table WHERE year=:year AND month=:month AND day >= :startDay AND day <= :endDay ORDER by day ASC")
+    List<Income> getWeeklyIncome(int year, int month, int startDay, int endDay);
 
     @Query("SELECT * FROM income_table WHERE year=:year AND month=:month AND day=:day")
     List<Income> getDailyIncome(int year, int month, int day);

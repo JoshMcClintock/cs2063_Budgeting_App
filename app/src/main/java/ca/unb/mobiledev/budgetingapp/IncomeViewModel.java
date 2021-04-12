@@ -38,6 +38,10 @@ public class IncomeViewModel extends AndroidViewModel {
     }
 
 
+    public List<Income> getWeeklyIncome(int year, int month, int startDay, int endDay) {
+        return incomeRepository.getWeeklyIncome(year, month, startDay, endDay);
+    }
+
     public List<Income> getDailyIncome(int year, int month, int day) {
         return incomeRepository.getDailyIncome(year, month, day);
     }

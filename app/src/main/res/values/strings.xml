@@ -42,6 +42,7 @@
     <string name="tv_monthly_savings_label">Monthly Savings:</string>
     <string name="tv_daily_income_label">Income:</string>
     <string name="tv_daily_expense_label">Expenses:</string>
+    <string name="tv_upcoming_items_label">Upcoming Items:</string>
 
     <!--  Edit Texts  -->
     <string name="et_date_hint">Select Date</string>

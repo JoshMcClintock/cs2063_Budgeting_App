@@ -2,16 +2,12 @@ package ca.unb.mobiledev.budgetingapp.repository;
 
 import android.app.Application;
 
-import androidx.lifecycle.LiveData;
-
-import java.util.List;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Future;
 
 import ca.unb.mobiledev.budgetingapp.dao.IncomeDao;
 import ca.unb.mobiledev.budgetingapp.db.AppDatabase;
-import ca.unb.mobiledev.budgetingapp.entity.Expense;
 import ca.unb.mobiledev.budgetingapp.entity.Income;
 
 public class IncomeRepository {
@@ -30,6 +26,25 @@ public class IncomeRepository {
             @Override
             public List<Income> call() {
                 return incomeDao.getAllIncome();
+            }
+        });
+
+        try {
+            liveData = future.get();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return liveData;
+    }
+
+
+    public List<Income> getWeeklyIncome(int year, int month, int startDay, int endDay) {
+        List<Income> liveData = null;
+
+        Future<List<Income>> future = AppDatabase.databaseWriterExecutor.submit(new Callable<List<Income>>() {
+            @Override
+            public List<Income> call() {
+                return incomeDao.getWeeklyIncome(year, month, startDay, endDay);
             }
         });
 
