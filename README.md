@@ -1,4 +1,4 @@
-# cs2063_Budgeting_App
+# CS2063 Team 17 Budgeting Application
 
 ## Release Notes:
 
