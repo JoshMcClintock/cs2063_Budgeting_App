@@ -191,16 +191,21 @@ public class CalendarFragment extends Fragment {
     private void loadDayLabels(TextView[] days, int startDay, int numDays) {
         days[0].setText("Today");
         String day = "";
-        int currentDay = (calendar.get(Calendar.DAY_OF_WEEK) + 1) % 7;
+        int currentDay = (calendar.get(Calendar.DAY_OF_WEEK) + 1);
+
+        if (currentDay == 8) {
+            currentDay = 1;
+        }
 
         for (int i=1; i<numDays; i++) {
             day = getWeekDay(currentDay);
             days[i].setText(day);
-            currentDay = (currentDay + 1) % 7;
 
+            currentDay++;
 
-
-
+            if (currentDay == 8) {
+                currentDay = 1;
+            }
         }
 
     }
